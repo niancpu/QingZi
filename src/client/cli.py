@@ -21,7 +21,7 @@ def check_server(max_retries: int = 3, retry_delay: int = 2) -> bool:
 
 def main():
     """命令行客户端主函数"""
-    print("🔍 正在检查服务器状态...")
+    print("正在检查服务器状态...")
     if not check_server():
         print("服务器未启动！请先运行: python run_server.py")
         return
