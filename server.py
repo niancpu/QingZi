@@ -53,33 +53,3 @@ def generate_reply(user_text:str,systemPrompt="你是一个友好、自然的中
         return completion.choices[0].message.content or ""
     except Exception as e:
         raise  RuntimeError(f"API请求失败：{e}")from e
-    
-class Avatar(BaseModel):
-    name:str;
-    persona:Union[str,None]=None;
-    style:Union[str,None]=None
-
-app.state.allInfo=defaultdict(dict)
-app.state.memory=defaultdict(dict)
-
-@app.get("/query/{uuid}")
-def Query(uuid:Union[str,None]):
-    return app.state.allInfo.get(uuid,"您要查询的对象不存在！")
-    
-@app.post("/avatar")     
-def saveAvatar(Avatar:Avatar):
-    info={"name":Avatar.name,"persona":Avatar.persona,"style":Avatar.style}
-    avatar_id=uuid4()
-    app.state.allInfo[avatar_id]=info
-    return f"您的数字人已保存:{avatar_id}"
-
-@app.post("chat/session/{avatar_id}/{session_id}")
-def theChat(avatar_id:Union[str,None],session_id:Union[str,None],message):
-    if not avatar_id in app.state.allInfo:
-        return "请确认您的avatar的uuid！"
-    else:
-        if app.state.memory[avatar_id][session_id] :
-            reply="{avater_id}({app.state.allInfo[style]}:我记住了：{message})"
-        else:
-            app.state.memory[avatar_id][session_id]={}
-            reply="{avater_id}({app.state.allInfo[style]}:我记住了：{message})"
