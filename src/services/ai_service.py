@@ -12,8 +12,9 @@ class AIService:
             api_key=API_KEY,
             base_url=BASE_URL
        )
-
-    def generate_reply(self, user_text: str, system_prompt: str | None = None) -> str:
+    def loop(self,spliced_messages:list)
+        
+    def generate_reply(self, spliced_messages:list) -> str:
         """生成 AI 回复"""
         assert MODEL is not None,"Model can't be None"
 
