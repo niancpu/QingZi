@@ -12,4 +12,7 @@ def set_path(path)->Path:
 def get_home_path()-> Path:
     if _home_path.exists():
         return _home_path
-    return set_path(_home_path/"history")
+    return set_path(_home_path)
+
+def init_dir()->Path:
+    
