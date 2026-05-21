@@ -25,3 +25,9 @@ def json_check_writer(json_path:Path,delta:dict)->None:
     except (FileNotFoundError,json.JSONDecodeError) as e:
         raise RuntimeError(f"文件{json_path}打开错误:{type(e).__name__},{e}") from e
 
+def json_creater(file: Path)->None:
+    if not file.exists():
+        try:
+            file.touch()
+        except OSError as e:
+            raise RuntimeError(f"文件{file}创建失败: {type(e).__name__}, {e}") from e

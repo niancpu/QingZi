@@ -12,35 +12,10 @@ class AIService:
             api_key=API_KEY,
             base_url=BASE_URL
        )
-    def loop(self,spliced_messages:list)
-        
-    def generate_reply(self, spliced_messages:list) -> str:
-        """生成 AI 回复"""
-        assert MODEL is not None,"Model can't be None"
-
-        if system_prompt is not None:
-            system_prompt=self.DEFAULT_SYSTEM_PROMPT
-
-        from services import fixed_reply        
-        
-        try:
-            response=self.client.chat.completions.create(
-                model=MODEL,
-                messages=[
-                    {"role":"system","content":self.DEFAULT_SYSTEM_PROMPT},
-                    {"role":"user","content":user_text}
-                ],
-                stream=False
-            )
-            
-            content=response.choices[0].message.content
-            if content is not None:
-                return content
-            else:
-                return ""
-            # return content or ""
-        except Exception as e:
-            raise RuntimeError(f"API请求错误:{e}") from e
+    def loop(self,
+             spliced_messages:list
+             
+             ):
 
 
 # 单例实例

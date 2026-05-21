@@ -1,0 +1,1 @@
+def splice_prompt(self,u)

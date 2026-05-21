@@ -1,4 +1,6 @@
 from pathlib import Path
+from dao import json_oper
+import logging
 
 _home_path=Path.home()/".qingzi_bot"
 
@@ -14,5 +16,9 @@ def get_home_path()-> Path:
         return _home_path
     return set_path(_home_path)
 
-def init_dir()->Path:
-    
+def init_dir():
+    try:
+        set_path(_home_path/"history")
+        json_oper.json_creater(_home_path/"config.json")
+    except RuntimeError as e:
+        logging.error(e)
